@@ -1,0 +1,1312 @@
+[
+    {
+        "id": "af9cf391.fd50a",
+        "type": "tab",
+        "label": "Duet Dashboard",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "85921641.1de008",
+        "type": "ui_template",
+        "z": "af9cf391.fd50a",
+        "group": "c284f5ba.1ce698",
+        "name": "Web Cam",
+        "order": 4,
+        "width": "7",
+        "height": "4",
+        "format": "<!DOCTYPE html>  \n<html>  \n    <head>  \n        <style> \n            .geeks { \n                width:100%; \n                height:100%px; \n            } \n            img { \n                width:100%; \n                height:100%; \n            } \n        </style> \n    </head>  \n    <body> \n        <div class = \"geeks\"> \n            <img src= \"{{(msg.payload)}}\"></img>\n        </div> \n    </body>  \n</html> \n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "x": 820,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3a212bb2.ae6824",
+        "type": "ui_button",
+        "z": "af9cf391.fd50a",
+        "d": true,
+        "name": "EM STOP",
+        "group": "c284f5ba.1ce698",
+        "order": 6,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "label": "Emergency Stop",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "fa-ban",
+        "payload": "Stop Printing?",
+        "payloadType": "str",
+        "topic": "data",
+        "topicType": "str",
+        "x": 820,
+        "y": 920,
+        "wires": [
+            [
+                "431b378.0170ec8"
+            ]
+        ]
+    },
+    {
+        "id": "431b378.0170ec8",
+        "type": "ui_toast",
+        "z": "af9cf391.fd50a",
+        "d": true,
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 1,
+        "ok": "STOP",
+        "cancel": "CANCEL",
+        "raw": false,
+        "className": "",
+        "topic": "Emergency Stop",
+        "name": "CONFIRM",
+        "x": 1040,
+        "y": 920,
+        "wires": [
+            [
+                "54d10dff.c94634"
+            ]
+        ]
+    },
+    {
+        "id": "b888b562.eb8fa8",
+        "type": "ui_gauge",
+        "z": "af9cf391.fd50a",
+        "name": "Tool Temp",
+        "group": "c284f5ba.1ce698",
+        "order": 1,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": "{{msg.label}}",
+        "label": "celsius",
+        "format": "{{value}}",
+        "min": "50",
+        "max": "300",
+        "colors": [
+            "#0080c0",
+            "#00ff00",
+            "#ca3838"
+        ],
+        "seg1": "160",
+        "seg2": "285",
+        "className": "",
+        "x": 830,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "2d283551.fbbe0a",
+        "type": "ui_gauge",
+        "z": "af9cf391.fd50a",
+        "name": "Bed Temp",
+        "group": "c284f5ba.1ce698",
+        "order": 3,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": "{{msg.label}}",
+        "label": "celsius",
+        "format": "{{value}}",
+        "min": "50",
+        "max": "110",
+        "colors": [
+            "#0080c0",
+            "#00ff00",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "85",
+        "x": 820,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "7e1ea05f.ce0fc",
+        "type": "ui_text",
+        "z": "af9cf391.fd50a",
+        "group": "c284f5ba.1ce698",
+        "order": 2,
+        "width": "1",
+        "height": "2",
+        "name": "FAN",
+        "label": "FAN",
+        "format": "{{msg.payload}}%",
+        "layout": "col-center",
+        "x": 810,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "e2a77ef9.63614",
+        "type": "link in",
+        "z": "af9cf391.fd50a",
+        "name": "Tool Gage In",
+        "links": [
+            "fae7aca7.e9a86"
+        ],
+        "x": 685,
+        "y": 980,
+        "wires": [
+            [
+                "b888b562.eb8fa8"
+            ]
+        ]
+    },
+    {
+        "id": "f666dcd5.c8314",
+        "type": "link in",
+        "z": "af9cf391.fd50a",
+        "name": "Fan Speed In",
+        "links": [
+            "34017d00.bdd544",
+            "bbb521fc.36f16",
+            "ff8e0e91.cd031",
+            "abf72364.16af6",
+            "b83f6620.d1bc38"
+        ],
+        "x": 685,
+        "y": 1040,
+        "wires": [
+            [
+                "7e1ea05f.ce0fc"
+            ]
+        ]
+    },
+    {
+        "id": "ee3127f5.f2edd8",
+        "type": "link in",
+        "z": "af9cf391.fd50a",
+        "name": "Bed Gage In",
+        "links": [
+            "987b7b53.3f87d8",
+            "fa168e69.15d0a",
+            "122e4ff2.c3b77",
+            "8bffac0f.4baa5"
+        ],
+        "x": 685,
+        "y": 1100,
+        "wires": [
+            [
+                "2d283551.fbbe0a"
+            ]
+        ]
+    },
+    {
+        "id": "160764c2.d3814b",
+        "type": "comment",
+        "z": "af9cf391.fd50a",
+        "name": "Dashboard Gui - Readme",
+        "info": "You must assign each of these nodes to a dashboard tab/group in the Dashboard configuration screen",
+        "x": 780,
+        "y": 845,
+        "wires": []
+    },
+    {
+        "id": "430f9050.c728a",
+        "type": "function",
+        "z": "af9cf391.fd50a",
+        "name": "Set T0 Gage",
+        "func": "var CurrToolTemp = msg.payload.patchModel.heat.heaters[1].current;\nvar ActiveToolTemp = msg.payload.fullModel.heat.heaters[1].active;\nvar StandbyToolTemp = msg.payload.fullModel.heat.heaters[1].standby;\nvar MaxToolTemp = msg.payload.fullModel.heat.heaters[1].active;\nvar ToolStatus = msg.payload.fullModel.heat.heaters[1].state;\nvar bT0GaugeSet = flow.get(\"bT0GaugeSet\");\nvar T0LastStatus = flow.get(\"T0LastStatus\");\n\nif (typeof bT0GaugeSet == 'undefined' || bT0GaugeSet === null) {\n    bT0GaugeSet = false;\n    T0LastStatus = ToolStatus;\n}\n\n if (ToolStatus == \"active\" || ToolStatus == 2) {\n        msg.label = \"T0: active > \" + ActiveToolTemp;\n    }\n    \n    if (ToolStatus == \"standby\" || ToolStatus == 1) {\n        msg.label = \"T0: standby > \" + StandbyToolTemp;\n    }\n    \n    \n    if (ToolStatus == \"off\" || ToolStatus === 0) {\n        msg.label = \"T0: off\";\n    } \n\nif (!bT0GaugeSet) {\n   \n\n    msg.ui_control = {min:0,\n                    max:Math.round(MaxToolTemp),\n                    seg1:139,\n                    seg2:(Math.round(MaxToolTemp) - 15),\n                    colors:[\"blue\",\"green\",\"red\"],\n                    gtype:\"gage\"};\n                    \n    flow.set(\"bT0GaugeSet\", true);                \n}\n\n//flow.set(\"T0LastStatus\", ToolStatus); \n\nmsg.payload = Math.round(CurrToolTemp);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1050,
+        "y": 120,
+        "wires": [
+            [
+                "fae7aca7.e9a86",
+                "f2ae3a24735e39fd"
+            ]
+        ]
+    },
+    {
+        "id": "fae7aca7.e9a86",
+        "type": "link out",
+        "z": "af9cf391.fd50a",
+        "name": "",
+        "links": [
+            "e2a77ef9.63614"
+        ],
+        "x": 1255,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "987b7b53.3f87d8",
+        "type": "link out",
+        "z": "af9cf391.fd50a",
+        "name": "",
+        "links": [
+            "ee3127f5.f2edd8"
+        ],
+        "x": 1255,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7cc433d5.f2e33c",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "T0 Current Temp",
+        "interval": "5",
+        "delta": "1",
+        "modelPath": "payload.fullModel.heat.heaters[1].current",
+        "outputs": 1,
+        "x": 790,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6775ed7a.474714",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "Bed Current Temp",
+        "interval": "5",
+        "delta": "1",
+        "modelPath": "heat.heaters[0].current",
+        "outputs": 1,
+        "x": 790,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2bc6f7e.c572b08",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "Layer Change",
+        "interval": "0",
+        "delta": "1",
+        "modelPath": "payload.fullModel.job.file.layer",
+        "outputs": 1,
+        "x": 780,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a9fd91d.dc9d48",
+        "type": "function",
+        "z": "af9cf391.fd50a",
+        "name": "Create Layer Info",
+        "func": "var currLayer = msg.payload.patchModel.job.file.layer;\nvar totalLayers = msg.payload.fullModel.job.file.layers;\nmsg.payload.LayersCombined= currLayer + \"/\" + totalLayers;\nmsg.payload.CurrLayer = currLayer;\nmsg.payload.TotalLayers = totalLayers;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 200,
+        "wires": [
+            [
+                "d825648d71d00561"
+            ]
+        ]
+    },
+    {
+        "id": "311228c.4e07bd8",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "Job Name Change",
+        "interval": "0",
+        "delta": "0",
+        "modelPath": "payload.fullModel.job.file.fileName",
+        "outputs": 1,
+        "x": 790,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "38e0aa90.23bd06",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "Job Time Left",
+        "interval": "30",
+        "delta": "10",
+        "modelPath": "payload.fullModel.job.timesLeft.file",
+        "outputs": 1,
+        "x": 780,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "23c46ccf.d27674",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "Fan Speed",
+        "interval": "1",
+        "delta": "0",
+        "modelPath": "payload.fullModel.fans[0].actualValue",
+        "outputs": 1,
+        "x": 770,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b83f6620.d1bc38",
+        "type": "link out",
+        "z": "af9cf391.fd50a",
+        "name": "DSF Msg Event",
+        "links": [
+            "f666dcd5.c8314"
+        ],
+        "x": 1255,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "72a01fff.a6094",
+        "type": "function",
+        "z": "af9cf391.fd50a",
+        "name": "Format Remaining Time",
+        "func": "var JobTime = msg.payload.fullModel.job.timesLeft.file;\n\nif (typeof JobTime == 'undefined' || JobTime === null) {JobTime = 0;}\n\n\nfunction secondsToHms(d) {\n    if (d === 0) {return \"00:00:00\";}\n    d = Number(d);\n    var h = Math.floor(d / 3600);\n    var m = Math.floor(d % 3600 / 60);\n    var s = Math.floor(d % 3600 % 60);\n\n    var hDisplay = h > 0 ? h + (h == 1 ? \" hour, \" : \" hours, \") : \"\";\n    var mDisplay = m > 0 ? m + (m == 1 ? \" minute, \" : \" minutes, \") : \"\";\n    var sDisplay = s > 0 ? s + (s == 1 ? \" second\" : \" seconds\") : \"\";\n    return hDisplay + mDisplay + sDisplay; \n}\n\nmsg.payload = \"Remaining Time: \" + secondsToHms(JobTime);\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 360,
+        "wires": [
+            [
+                "82455826b6b6613e"
+            ]
+        ]
+    },
+    {
+        "id": "4c78b2b.2e9fc4c",
+        "type": "function",
+        "z": "af9cf391.fd50a",
+        "name": "Format Job Name",
+        "func": "var splitFile = function (str) {\n    return str.split('\\\\').pop().split('/').pop();\n};\n\nvar jobName = msg.payload.fullModel.job.file.fileName;\nvar fileName = splitFile(jobName);\n\n//trim off the gcode extension from the file name\nfileName= fileName.substring(0, fileName.length -6);\n\nflow.set(\"jobName\", fileName);\nflow.set(\"counter\", 0);\n\n//set cmds to create directory\nmsg.payload.path = flow.get(\"imgPath\", \"storeInFile\");\nmsg.payload.filePrefix = fileName;\n\n//msg.payload = \"mkdir \" + flow.get(\"imgPath\") + fileName;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 300,
+        "wires": [
+            [
+                "6e25238c31650289",
+                "8fc13e85cd69d05c"
+            ]
+        ]
+    },
+    {
+        "id": "1666f24c.6b9c3e",
+        "type": "function",
+        "z": "af9cf391.fd50a",
+        "name": "Set Bed Gage",
+        "func": "var CurrToolTemp = msg.payload.patchModel.heat.heaters[0].current;\nvar ActiveToolTemp = msg.payload.fullModel.heat.heaters[0].active;\nvar StandbyToolTemp = msg.payload.fullModel.heat.heaters[0].standby;\nvar MaxToolTemp = msg.payload.fullModel.heat.heaters[0].active;\nvar ToolStatus = msg.payload.fullModel.heat.heaters[0].state;\nvar bBedGaugeSet = flow.get(\"bBedGaugeSet\");\nvar bedLastStatus = flow.get(\"bedLastStatus\");\n\nif (typeof bBedGaugeSet == 'undefined' || bBedGaugeSet === null) {\n    bBedGaugeSet = false;\n    bedLastStatus = ToolStatus;\n}\n\nif (ToolStatus == \"active\" || ToolStatus == 2) {\n        msg.label = \"BED: active > \" + ActiveToolTemp;\n    }\n    \n    if (ToolStatus == \"standby\" || ToolStatus == 1) {\n        msg.label = \"BED: standby > \" + StandbyToolTemp;\n    }\n    \n    if (ToolStatus == \"off\" || ToolStatus === 0) {\n        msg.label = \"BED: off\";\n    } \n\nif (!bBedGaugeSet) {\n    \n    msg.ui_control = {min:0,\n                    max:Math.round(MaxToolTemp),\n                    seg1:49,\n                    seg2:(Math.round(MaxToolTemp) - 5),\n                    colors:[\"blue\",\"green\",\"red\"],\n                    gtype:\"gage\"};\n\n    flow.set(\"bBedGaugeSet\", true);\n}\n\n//flow.set(\"bedLastStatus\", ToolStatus);    \n\nmsg.payload = Math.round(CurrToolTemp);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 40,
+        "wires": [
+            [
+                "987b7b53.3f87d8",
+                "4751ac3a78bbf639"
+            ]
+        ]
+    },
+    {
+        "id": "a22551b6.e5b31",
+        "type": "function",
+        "z": "af9cf391.fd50a",
+        "name": "Set Fan Speed",
+        "func": "var FanSpeed = msg.payload.fullModel.fans[0].actualValue;\n\nif (FanSpeed >= 0.01){\n    msg.payload = FanSpeed * 100;\n} else {\n    msg.payload = 0;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1040,
+        "y": 420,
+        "wires": [
+            [
+                "b83f6620.d1bc38",
+                "1b0227e23ee2b0ff"
+            ]
+        ]
+    },
+    {
+        "id": "bf494db0.d7d2c",
+        "type": "inject",
+        "z": "af9cf391.fd50a",
+        "name": "WebCamURL",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "http://192.168.1.131:8081/?action=stream",
+        "payloadType": "str",
+        "x": 560,
+        "y": 1160,
+        "wires": [
+            [
+                "85921641.1de008"
+            ]
+        ]
+    },
+    {
+        "id": "54d10dff.c94634",
+        "type": "dsf-command",
+        "z": "af9cf391.fd50a",
+        "d": true,
+        "name": "Emergency Stop",
+        "command": "M112",
+        "server": "32d83e82d51cfe05",
+        "x": 1270,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4751ac3a78bbf639",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "bed temp dsf",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "bed temp dsf"
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1450,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f2ae3a24735e39fd",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "hot temp dsf",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "hot temp dsf"
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "icon",
+                "value": "mdi:printer-3d-nozzle-heat"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1430,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ee750d40fe5c07d8",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "MCU Temp",
+        "interval": "5",
+        "delta": "1",
+        "modelPath": "payload.fullModel.boards[0].mcuTemp",
+        "outputs": 1,
+        "x": 770,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e8653d468643ea72",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "Vin",
+        "interval": "5",
+        "delta": "1",
+        "modelPath": "payload.fullModel.boards[0].vIn.current",
+        "outputs": 1,
+        "x": 790,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a1f29f1a400b1ab3",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "VIn",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "voltage dsf"
+            },
+            {
+                "property": "device_class",
+                "value": "voltage"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload.fullModel.boards[0].vIn.current",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1370,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "75abfeb2790cbe39",
+        "type": "dsf-event",
+        "z": "af9cf391.fd50a",
+        "name": "State",
+        "interval": "5",
+        "delta": "1",
+        "modelPath": "payload.fullModel.state.status",
+        "outputs": 1,
+        "x": 750,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "84ec6881376855a0",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "status",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "duet status dsf"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload.fullModel.state.status",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1370,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "82455826b6b6613e",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "job_remaining",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "job remaining"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1340,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d825648d71d00561",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "ayer_info",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "layer info"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1300,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1b0227e23ee2b0ff",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "fan_spd_dsf",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "fan spd dsf"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1390,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11f0b88c88fee929",
+        "type": "dsf-monitor",
+        "z": "af9cf391.fd50a",
+        "name": "DSF Monitor",
+        "server": "32d83e82d51cfe05",
+        "autoStart": true,
+        "x": 390,
+        "y": 280,
+        "wires": [
+            [
+                "ee750d40fe5c07d8",
+                "e8653d468643ea72",
+                "75abfeb2790cbe39",
+                "a1f29f1a400b1ab3",
+                "ad5776437e6b55c0",
+                "a22551b6.e5b31",
+                "72a01fff.a6094",
+                "8a9fd91d.dc9d48",
+                "4c78b2b.2e9fc4c",
+                "430f9050.c728a",
+                "1666f24c.6b9c3e",
+                "7348960d8d18c017"
+            ]
+        ]
+    },
+    {
+        "id": "ad5776437e6b55c0",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "mcu temp dsf",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "mcu temp dsf"
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": "measurement"
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload.fullModel.boards[0].mcuTemp.current",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1380,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7348960d8d18c017",
+        "type": "change",
+        "z": "af9cf391.fd50a",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.fullModel.state.status",
+                "pt": "msg",
+                "from": "idle",
+                "fromt": "str",
+                "to": "Бездействие",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.fullModel.state.status",
+                "pt": "msg",
+                "from": "busy",
+                "fromt": "str",
+                "to": "Занят",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.fullModel.state.status",
+                "pt": "msg",
+                "from": "processing",
+                "fromt": "str",
+                "to": "Идет печать",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 640,
+        "wires": [
+            [
+                "84ec6881376855a0"
+            ]
+        ]
+    },
+    {
+        "id": "6e25238c31650289",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "file name dsf",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "file name dsf"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "msg.payload.fullModel.job.file.fileName",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1590,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8fc13e85cd69d05c",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "file name dsf",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "file name dsf mb"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "msg.payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 1590,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "25855816874c2f6e",
+        "type": "debug",
+        "z": "af9cf391.fd50a",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.monitorState",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "3a4ec7ea36be6419",
+        "type": "dsf-command",
+        "z": "af9cf391.fd50a",
+        "name": "Pause",
+        "command": "M25",
+        "server": "32d83e82d51cfe05",
+        "x": 1090,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d13643782c2877a2",
+        "type": "ha-entity",
+        "z": "af9cf391.fd50a",
+        "name": "Pause print",
+        "server": "edb06d88b96770cb",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 2,
+        "entityType": "switch",
+        "config": [
+            {
+                "property": "name",
+                "value": "Pause print dsf"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 930,
+        "y": 760,
+        "wires": [
+            [
+                "3a4ec7ea36be6419"
+            ],
+            [
+                "0b35fd1d0933da1c"
+            ]
+        ]
+    },
+    {
+        "id": "41561e90ac3376d9",
+        "type": "ui_button",
+        "z": "af9cf391.fd50a",
+        "name": "Pause",
+        "group": "c284f5ba.1ce698",
+        "order": 6,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "label": "Pause",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "fa-ban",
+        "payload": "Pause Printing?",
+        "payloadType": "str",
+        "topic": "data",
+        "topicType": "str",
+        "x": 750,
+        "y": 760,
+        "wires": [
+            [
+                "d13643782c2877a2"
+            ]
+        ]
+    },
+    {
+        "id": "0b35fd1d0933da1c",
+        "type": "dsf-command",
+        "z": "af9cf391.fd50a",
+        "name": "Resume",
+        "command": "M24",
+        "server": "32d83e82d51cfe05",
+        "x": 1100,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c284f5ba.1ce698",
+        "type": "ui_group",
+        "name": "3DP 2 Status",
+        "tab": "712fac99.add4d4",
+        "order": 1,
+        "disp": true,
+        "width": "7",
+        "collapse": true
+    },
+    {
+        "id": "32d83e82d51cfe05",
+        "type": "dsf-connector",
+        "server": "192.168.1.40",
+        "btype": "Duet",
+        "bPollRate": "500",
+        "plainPass": "reprap"
+    },
+    {
+        "id": "edb06d88b96770cb",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 4,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30",
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": ": ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "default",
+        "statusTimeFormat": "h:m"
+    },
+    {
+        "id": "712fac99.add4d4",
+        "type": "ui_tab",
+        "name": "Duet Dashboard",
+        "icon": "dashboard",
+        "order": 26,
+        "disabled": false,
+        "hidden": false
+    }
+]
